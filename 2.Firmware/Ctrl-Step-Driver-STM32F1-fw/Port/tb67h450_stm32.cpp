@@ -30,6 +30,9 @@ void TB67H450::InitPwm()
 
 void TB67H450::DacOutputVoltage(uint16_t _voltageA_3300mVIn12bits, uint16_t _voltageB_3300mVIn12bits)
 {
+    //使用定时器2的通道3和通道4来做PWM控制
+    //调用HAL库函数__HAL_TIM_SET_COMPARE来改变占空比
+    //需要先开启 HAL_TIM_PWM_Start()，否则输出不了PWM波 /Core/tim.c MX_TIM2_Init() line117
     __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_4, _voltageA_3300mVIn12bits >> 2);
     __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_3, _voltageB_3300mVIn12bits >> 2);
 }
@@ -37,6 +40,7 @@ void TB67H450::DacOutputVoltage(uint16_t _voltageA_3300mVIn12bits, uint16_t _vol
 
 void TB67H450::SetInputA(bool _statusAp, bool _statusAm)
 {
+    //通过BSRR和BRR可以快速地对GPIOx管脚置1或者0
     _statusAp ? (GPIOA->BSRR = GPIO_PIN_5) : (GPIOA->BRR = GPIO_PIN_5);
     _statusAm ? (GPIOA->BSRR = GPIO_PIN_4) : (GPIOA->BRR = GPIO_PIN_4);
 }

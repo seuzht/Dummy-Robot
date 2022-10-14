@@ -6,8 +6,7 @@
 class TB67H450Base : public DriverBase
 {
 public:
-    explicit TB67H450Base()
-    = default;
+    explicit TB67H450Base() = default;
 
     void Init() override;
 

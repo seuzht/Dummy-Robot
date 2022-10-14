@@ -40,12 +40,12 @@ void TB67H450Base::SetFocCurrentVector(uint32_t _directionInCount, int32_t _curr
         SetInputB(true, true);
 }
 
-
+//设置步进电机的两相 电流/电压
 void TB67H450Base::SetTwoCoilsCurrent(uint16_t _currentA_3300mAIn12Bits, uint16_t _currentB_3300mAIn12Bits)
 {
     /*
      * After SetFocCurrentVector calculation a 12bits value was mapped to 0~3300mA.
-     * And due to used 0.1Ohm shank resistor, 0~3300mV V-ref means 0~3300mA CurrentSetPoint,
+     * And due to used 0.1Ohm shunt resistor, 0~3300mV V-ref means 0~3300mA CurrentSetPoint,
      * For more details, see TB67H450 Datasheet page.10 .
      */
 

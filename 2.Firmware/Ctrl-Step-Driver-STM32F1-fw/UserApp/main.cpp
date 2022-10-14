@@ -50,7 +50,7 @@ void Main()
     /*---------- Apply EEPROM Settings ----------*/
     // Setting priority is EEPROM > Motor.h
     EEPROM eeprom;
-    eeprom.get(0, boardConfig);
+    eeprom.get(0, boardConfig);//从eeprom中读取数据到boardConfig中
     if (boardConfig.configStatus != CONFIG_OK) // use default settings
     {
         boardConfig = BoardConfig_t{
@@ -69,7 +69,7 @@ void Main()
             .enableMotorOnBoot=false,
             .enableStallProtect=false
         };
-        eeprom.put(0, boardConfig);
+        eeprom.put(0, boardConfig);//将配置好的boardConfig数据保存到eeprom flash中
     }
     motor.config.motionParams.encoderHomeOffset = boardConfig.encoderHomeOffset;
     motor.config.motionParams.ratedCurrent = boardConfig.currentLimit;
@@ -110,7 +110,6 @@ void Main()
     for (;;)
     {
         encoderCalibrator.TickMainLoop();
-
 
         if (boardConfig.configStatus == CONFIG_COMMIT)
         {

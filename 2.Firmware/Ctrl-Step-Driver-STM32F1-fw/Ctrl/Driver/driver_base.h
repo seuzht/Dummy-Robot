@@ -28,7 +28,7 @@ protected:
     typedef struct
     {
         uint16_t sinMapPtr;
-        int16_t sinMapData;
+        int16_t  sinMapData;
         uint16_t dacValue12Bits;
     } FastSinToDac_t;
 
